@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require_relative '../lib/sandboxy'
+
+Sandboxy::App.new.run if $0 == __FILE__
