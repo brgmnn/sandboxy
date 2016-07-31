@@ -11,7 +11,7 @@ class Sandboxy::Commands::Build
   def run
     puts 'Building Images'.light_blue
 
-    dockerfiles = Dir[File.expand_path('images/*.dockerfile', Sandboxy::App::PATH)]
+    dockerfiles = Dir[File.expand_path('images/*.dockerfile', Sandboxy::PATH)]
 
     progress dockerfiles do |path|
       dockerfile = File.basename(path)

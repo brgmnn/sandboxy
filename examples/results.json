@@ -1,0 +1,32 @@
+{
+  "javascript-candidate": {
+    "fibonacci": {
+      "ran": true,
+      "stdout": "909020757882815442762588444239 test passed\r\n909020757882815442762588444239 test passed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test passed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n909020757882815442762588444239 test failed\r\n",
+      "stderr": "",
+      "score": {
+        "passed": 3,
+        "failed": 18
+      }
+    },
+    "hello-world": {
+      "ran": true,
+      "stdout": "hello world\r\n",
+      "stderr": ""
+    }
+  },
+  "python-candidate": {
+    "test": {
+      "ran": true,
+      "stdout": "hello world\r\n",
+      "stderr": ""
+    }
+  },
+  "ruby-candidate": {
+    "test": {
+      "ran": true,
+      "stdout": "hello world\r\n",
+      "stderr": ""
+    }
+  }
+}

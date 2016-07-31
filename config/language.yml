@@ -1,0 +1,14 @@
+javascript:
+  stages:
+    - run:
+        command: nodejs
+
+python:
+  stages:
+    - run:
+        command: python
+
+ruby:
+  stages:
+    - run:
+        command: ruby
