@@ -58,6 +58,10 @@ class Sandboxy::Commands::Run
       end
 
       print "\033[2K\r #{id.blue.bold} #{name} #{score}\n"
+
+      unless res[:ran]
+        puts "\033[2K\r #{stdout}"
+      end
     end
 
     File.open('results.json', 'w') do |f|

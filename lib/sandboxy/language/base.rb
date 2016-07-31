@@ -8,4 +8,12 @@ module Sandboxy::Language::Base
       path
     )
   end
+
+  def pass(id)
+    raise NotImplementedError
+  end
+
+  def fail(id)
+    raise NotImplementedError
+  end
 end
