@@ -19,6 +19,7 @@ DESCRIPTION
         c.description = command::DESCRIPTION
         c.example 'description', 'command example'
         c.option '--some-switch', 'Some switch that does something'
+        c.option '--verbose', 'Verbose output'
 
         c.action do |args, options|
           command.new(args, options).run

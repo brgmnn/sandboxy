@@ -16,4 +16,8 @@ module Sandboxy::Language::Base
   def fail(id)
     raise NotImplementedError
   end
+
+  def assert(id)
+    raise NotImplementedError
+  end
 end

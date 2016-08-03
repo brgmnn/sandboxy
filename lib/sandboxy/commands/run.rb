@@ -19,49 +19,61 @@ class Sandboxy::Commands::Run
 
       # If the question has an associated ERB template, wrap the file in the
       # template.
-      template_id, path = Sandboxy::Template.wrap(path)
+      #template_id, path = Sandboxy::Template.wrap(path)
+      templates = Sandboxy::Template.wrap(path)
 
-      # Get the language and run the file in a container runtime.
-      stdout, stderr, status_code = Sandboxy::Language.get_class(ext).run(path)
+      score, total = 0, 0
 
       # Write to the results object.
       res = results[id][slug] = {
-        ran: status_code == 0,
-        stdout: stdout,
-        stderr: stderr
+        tests: [],
+        invalid: 0
       }
 
-      name = name.red unless res[:ran]
+      templates.each do |t|
+        tid, tpath, tsuite = t.values_at(:id, :path, :suite_path)
 
-      # Find any test results.
-      passed = stdout.lines.select do |line|
-        line =~ /#{template_id} test passed/
-      end.count
+        # Get the language and run the file in a container runtime.
+        stdout, stderr, profile = Sandboxy::Language.get_class(ext).run(tpath)
 
-      failed = stdout.lines.select do |line|
-        line =~ /#{template_id} test failed/
-      end.count
+        results[id][slug][:tests] << profile.merge({
+          path: tsuite,
+          stdout: stdout,
+          stderr: stderr
+        })
 
-      total = passed + failed
+        unless profile[:status_code] == 0
+          name = name.red
+          res[:invalid] += 1
 
-      # If we have a template id and test have been run then save the test
-      # results.
-      unless template_id.nil? or total == 0
-        res[:score] = { passed: passed, failed: failed }
+          # Print the output for debugging purposes if it failed to run
+          output = stdout[0..200].lines[0..10].map { |l| "    #{l}" }.join('')
+          puts "\033[2K\r#{output}"
+        end
 
-        perc = res[:score][:passed] / total.to_f
-        score = "#{res[:score][:passed]}/#{total}"
+        # Find any test results.
+        passed = stdout.lines.select { |ln| ln =~ /#{tid} test passed/ }.count
+        failed = stdout.lines.select { |ln| ln =~ /#{tid} test failed/ }.count
 
-        score = score.light_red if perc < 0.33
-        score = score.light_yellow if perc.between?(0.33, 0.66)
-        score = score.light_green if perc > 0.66
+        score += passed
+        total += passed + failed
       end
 
-      print "\033[2K\r #{id.blue.bold} #{name} #{score}\n"
+      # Add a score message and statistics to the result if test suites were
+      # run.
+      unless total == 0
+        res[:score] = { passed: score, failed: total - score }
 
-      unless res[:ran]
-        puts "\033[2K\r #{stdout}"
+        perc = score / total.to_f
+
+        score_msg = "#{score}/#{total}"
+        score_msg = score_msg.light_red if perc < 0.33
+        score_msg = score_msg.light_yellow if perc.between?(0.33, 0.66)
+        score_msg = score_msg.light_green if perc > 0.66
       end
+
+      # Loggin information
+      print "\033[2K\r #{id.blue.bold} #{name} #{score_msg}\n"
     end
 
     File.open('results.json', 'w') do |f|

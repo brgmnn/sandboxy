@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'erb'
 require 'json'
+require 'pry'
 
 require 'commander'
 require 'docker'

@@ -11,8 +11,18 @@ class Sandboxy::Container::Image
       Tty: true,
       **Sandboxy::Config::Containers::CREATE
     )
-    container.start
-    ran = container.wait(10)
+
+    profile = {}
+
+    begin
+      container.start
+      profile = {
+        status_code: container.wait(2)['StatusCode'],
+        killed: false
+      }
+    rescue Docker::Error::TimeoutError
+      profile = { status_code: 1, killed: true }
+    end
 
     stdout = container.logs(stdout: true)
     stderr = container.logs(stderr: true)
@@ -22,6 +32,6 @@ class Sandboxy::Container::Image
     container.delete(force: true)
     image.remove(force: true)
 
-    return stdout, stderr, ran['StatusCode']
+    return stdout, stderr, profile
   end
 end
