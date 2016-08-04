@@ -2,7 +2,10 @@ class Sandboxy::Container::Image
   def self.run(language, cmd, path)
     # Create Image
     image = Docker::Image.create(fromImage: "sandboxy:#{language}")
-      .insert_local('localPath' => path, 'outputPath' => '/app')
+      .insert_local(
+        'localPath' => path,
+        'outputPath' => '/app'
+      )
 
     # Create Container
     container = Docker::Container.create(
@@ -32,6 +35,6 @@ class Sandboxy::Container::Image
     container.delete(force: true)
     image.remove(force: true)
 
-    return stdout, stderr, profile
+    [stdout, stderr, profile]
   end
 end

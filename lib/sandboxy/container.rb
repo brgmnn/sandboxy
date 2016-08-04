@@ -2,9 +2,7 @@
 #
 # Owns logic for operating on a container
 
-module Sandboxy
-  module Container
-  end
+module Sandboxy::Container
 end
 
 require_relative 'container/image'

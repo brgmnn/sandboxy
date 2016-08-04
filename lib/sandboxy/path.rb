@@ -4,10 +4,10 @@ class Sandboxy::Path
   def initialize(path)
     @extension = File.extname(path)[1..-1]
     @file = File.basename(path)
-    @filename = File.basename(@file,File.extname(@file))
+    @filename = File.basename(@file, File.extname(@file))
   end
 
   def info
-    return @file, @filename, @extension
+    [@file, @filename, @extension]
   end
 end

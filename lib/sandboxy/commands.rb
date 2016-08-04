@@ -1,5 +1,6 @@
-module Sandboxy
-  module Commands
+module Sandboxy::Commands
+  def self.all
+    constants.select { |c| Sandboxy::Commands.const_get(c).is_a? Class }
   end
 end
 

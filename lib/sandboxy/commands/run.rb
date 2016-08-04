@@ -1,15 +1,15 @@
 class Sandboxy::Commands::Run
   include Commander::Methods
 
-  SYNTAX = '[options]'
-  SUMMARY = 'run batch'
-  DESCRIPTION = ''
+  SYNTAX = '[options]'.freeze
+  SUMMARY = 'run batch'.freeze
+  DESCRIPTION = ''.freeze
 
   def initialize(args, options)
   end
 
   def run
-    results = Hash.new { |hash,key| hash[key] = {} }
+    results = Hash.new { |hash, key| hash[key] = {} }
 
     progress Dir['code/**/*.*'] do |path|
       id = path.split('/')[-2]
@@ -19,10 +19,10 @@ class Sandboxy::Commands::Run
 
       # If the question has an associated ERB template, wrap the file in the
       # template.
-      #template_id, path = Sandboxy::Template.wrap(path)
       templates = Sandboxy::Template.wrap(path)
 
-      score, total = 0, 0
+      score = 0
+      total = 0
 
       # Write to the results object.
       res = results[id][slug] = {
@@ -36,11 +36,11 @@ class Sandboxy::Commands::Run
         # Get the language and run the file in a container runtime.
         stdout, stderr, profile = Sandboxy::Language.get_class(ext).run(tpath)
 
-        results[id][slug][:tests] << profile.merge({
+        results[id][slug][:tests] << profile.merge(
           path: tsuite,
           stdout: stdout,
           stderr: stderr
-        })
+        )
 
         unless profile[:status_code] == 0
           name = name.red

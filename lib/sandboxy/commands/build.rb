@@ -1,9 +1,9 @@
 class Sandboxy::Commands::Build
   include Commander::Methods
 
-  SYNTAX = '[options]'
-  SUMMARY = 'hello'
-  DESCRIPTION = ''
+  SYNTAX = '[options]'.freeze
+  SUMMARY = 'hello'.freeze
+  DESCRIPTION = ''.freeze
 
   def initialize(args, options)
   end
@@ -18,7 +18,10 @@ class Sandboxy::Commands::Build
       tag = File.basename(path, '.dockerfile')
 
       print dockerfile.bold
-      image = Docker::Image.build_from_dir(File.dirname(path), { 'dockerfile': dockerfile })
+      image = Docker::Image.build_from_dir(
+        File.dirname(path),
+        'dockerfile' => dockerfile
+      )
 
       image.tag(repo: 'sandboxy', tag: tag, force: true)
     end

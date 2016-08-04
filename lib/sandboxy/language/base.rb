@@ -2,22 +2,22 @@ module Sandboxy::Language::Base
   def run(path)
     file = File.basename(path)
 
-    return Sandboxy::Container::Image.run(
-      self.name.downcase.split('::').last,
+    Sandboxy::Container::Image.run(
+      name.downcase.split('::').last,
       [self::CMD, "/app/#{file}"],
       path
     )
   end
 
-  def pass(id)
+  def pass(_id)
     raise NotImplementedError
   end
 
-  def fail(id)
+  def fail(_id)
     raise NotImplementedError
   end
 
-  def assert(id)
+  def assert(_id)
     raise NotImplementedError
   end
 end

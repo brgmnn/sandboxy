@@ -17,12 +17,12 @@ class Sandboxy::Template
     # If there are no templates to test
     return [{ id: nil, path: path }] if templates.nil?
 
-    return templates.map do |template_path|
+    templates.map do |template_path|
       @id = Random.rand(10**IDSPACE)
       @pass = langclass.pass(@id)
       @fail = langclass.fail(@id)
 
-      if File.exists?(template_path)
+      if File.exist?(template_path)
         @solution = File.read(path)
 
         template = ERB.new(File.read(template_path))

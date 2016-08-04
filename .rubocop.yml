@@ -1,2 +1,21 @@
 Documentation:
   Enabled: false
+
+Style/AlignHash:
+  EnforceHashRocketStyle: table
+  EnforceColonStyle: table
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Style/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Metrics/MethodLength:
+  Max: 20

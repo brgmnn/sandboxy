@@ -12,7 +12,7 @@ class Sandboxy::Language::Javascript
   end
 
   # hmm how will this work
-  def self.assert(id, &block)
-    "if (#{yield}) { #{self.pass(id)} } else { #{self.fail(id)} }"
-  end
+  # def self.assert(id, &_)
+  #   "if (#{yield}) { #{pass(id)} } else { #{fail(id)} }"
+  # end
 end

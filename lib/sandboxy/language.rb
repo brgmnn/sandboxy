@@ -2,23 +2,21 @@
 #
 # Each language class owns the language specific logic for a job.
 
-module Sandboxy
-  module Language
-    BY_EXTENSION = {
-      js: 'javascript',
-      py: 'python',
-      rb: 'ruby'
-    }
+module Sandboxy::Language
+  BY_EXTENSION = {
+    js: 'javascript',
+    py: 'python',
+    rb: 'ruby'
+  }.freeze
 
-    def self.get_class(ext)
-      return Object.const_get(
-        "Sandboxy::Language::#{BY_EXTENSION[ext.to_sym].capitalize}"
-      )
-    end
+  def self.get_class(ext)
+    Object.const_get(
+      "Sandboxy::Language::#{BY_EXTENSION[ext.to_sym].capitalize}"
+    )
+  end
 
-    def self.get(ext)
-      BY_EXTENSION[ext.to_sym]
-    end
+  def self.get(ext)
+    BY_EXTENSION[ext.to_sym]
   end
 end
 

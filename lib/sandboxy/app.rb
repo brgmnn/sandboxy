@@ -8,10 +8,7 @@ class Sandboxy::App
 Run a variety of programs sandboxed in containers
 DESCRIPTION
 
-    Sandboxy::Commands.constants
-    .select { |c| Sandboxy::Commands.const_get(c).is_a? Class }
-    .each do |cmd|
-
+    Sandboxy::Commands.all.each do |cmd|
       command cmd.to_s.underscore.to_sym do |c|
         command = "Sandboxy::Commands::#{cmd}".constantize
         c.syntax = command::SYNTAX
