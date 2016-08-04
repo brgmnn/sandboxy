@@ -1,5 +1,7 @@
 # Sandboxy
 
+[![Build Status](https://api.travis-ci.org/brgmnn/sandboxy.svg?branch=master)](https://travis-ci.org/brgmnn/sandboxy)
+
 ## Templates
 
 A template is just an ERB template that wraps a solution. It has the path:
