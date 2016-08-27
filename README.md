@@ -31,8 +31,8 @@ Here is an example `factorial.js.erb`:
 <%= @solution %>
 
 if (factorial(6) === 720) {
-    <%= @pass %>
+    <%= pass %>
 } else {
-    <%= @fail %>
+    <%= fail %>
 }
 ```
