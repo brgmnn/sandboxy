@@ -8,13 +8,24 @@ class Sandboxy::Commands::Run
   SUMMARY = 'run batch'.freeze
   DESCRIPTION = ''.freeze
 
-  def initialize(args, options)
+  def initialize(args, _options)
+    @filters = args
+  end
+
+  def paths
+    return Dir['code/**/*.*'] if @filters.empty?
+
+    Dir['code/**/*.*'].select do |path|
+      @filters.any? do |f|
+        path.include?(f)
+      end
+    end
   end
 
   def run
     results = Hash.new { |hash, key| hash[key] = {} }
 
-    progress Dir['code/**/*.*'] do |path|
+    progress paths do |path|
       id = path.split('/')[-2]
       file, slug, ext = Sandboxy::Path.new(path).info
 
