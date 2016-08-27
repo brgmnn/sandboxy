@@ -1,4 +1,4 @@
-class Sandboxy::Language::Ruby
+module Sandboxy::Language::Ruby
   extend Sandboxy::Language::Base
 
   self::CMD = 'ruby'.freeze

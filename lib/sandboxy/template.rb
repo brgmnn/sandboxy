@@ -8,7 +8,6 @@ class Sandboxy::Template
   def self.wrap(path)
     _, slug, ext = Sandboxy::Path.new(path).info
     language = Sandboxy::Language.get(ext)
-    langclass = Sandboxy::Language.get_class(ext)
 
     templates = (Dir["templates/#{language}/#{slug}.#{ext}.erb"] \
       + Dir["templates/#{language}/#{slug}/*.#{ext}.erb"])
@@ -18,22 +17,30 @@ class Sandboxy::Template
     return [{ id: nil, path: path }] if templates.nil?
 
     templates.map do |template_path|
-      @id = Random.rand(10**IDSPACE)
-      @pass = langclass.pass(@id)
-      @fail = langclass.fail(@id)
+      tmp_path = Tempfile.new.path
+      template = new(path, template_path)
 
-      if File.exist?(template_path)
-        @solution = File.read(path)
-
-        template = ERB.new(File.read(template_path))
-        tmp_path = Tempfile.new.path
-
-        File.open(tmp_path, 'w') do |f|
-          f.write(template.result(binding))
-        end
+      File.open(tmp_path, 'w') do |f|
+        f.write template.output
       end
 
-      { id: @id, path: tmp_path, suite_path: template_path }
+      { id: template.id, path: tmp_path, suite_path: template_path }
     end
+  end
+
+  attr_reader :id
+
+  def initialize(path, template_path)
+    _, _, ext = Sandboxy::Path.new(path).info
+
+    extend Sandboxy::Language.get_class(ext)
+
+    @id = Random.rand(10**IDSPACE)
+    @solution = File.read(path)
+    @template = ERB.new(File.read(template_path), nil, nil, '@output')
+  end
+
+  def output
+    @result ||= @template.result(binding)
   end
 end

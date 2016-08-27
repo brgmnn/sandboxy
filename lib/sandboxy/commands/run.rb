@@ -1,3 +1,6 @@
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
+
 class Sandboxy::Commands::Run
   include Commander::Methods
 
@@ -42,7 +45,7 @@ class Sandboxy::Commands::Run
           stderr: stderr
         )
 
-        unless profile[:status_code] == 0
+        unless profile[:status_code].zero?
           name = name.red
           res[:invalid] += 1
 
@@ -61,7 +64,7 @@ class Sandboxy::Commands::Run
 
       # Add a score message and statistics to the result if test suites were
       # run.
-      unless total == 0
+      unless total.zero?
         res[:score] = { passed: score, failed: total - score }
 
         perc = score / total.to_f

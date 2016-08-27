@@ -9,15 +9,15 @@ module Sandboxy::Language::Base
     )
   end
 
-  def pass(_id)
+  def pass
     raise NotImplementedError
   end
 
-  def fail(_id)
+  def fail
     raise NotImplementedError
   end
 
-  def assert(_id)
+  def assert
     raise NotImplementedError
   end
 end
