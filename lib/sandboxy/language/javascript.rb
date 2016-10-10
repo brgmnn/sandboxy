@@ -1,7 +1,7 @@
 module Sandboxy::Language::Javascript
   extend Sandboxy::Language::Base
 
-  self::CMD = 'nodejs'.freeze
+  self::CMD = 'node'.freeze
 
   def pass
     "console.log('#{@id} test passed');"
