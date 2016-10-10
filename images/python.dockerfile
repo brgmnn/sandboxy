@@ -1,3 +1,3 @@
 FROM sandboxy:base
 
-RUN apt-get install -y python
+RUN apk add python

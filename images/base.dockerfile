@@ -1,8 +1,8 @@
-FROM ubuntu
+FROM alpine:3.4
 
-RUN apt-get update -qq
+RUN apk update -q && \
+    mkdir /app
 
-RUN mkdir /app
 #RUN useradd -s /usr/sbin/nologin -r -M -d /app user
 
 WORKDIR /app

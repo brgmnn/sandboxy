@@ -1,5 +1,4 @@
 FROM sandboxy:base
 
-RUN apt-get install -y nodejs npm
-
-RUN npm install -g underscore
+RUN apk add nodejs-lts && \
+    npm install underscore
