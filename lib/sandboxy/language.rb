@@ -4,6 +4,7 @@
 
 module Sandboxy::Language
   BY_EXTENSION = {
+    java: 'java',
     js: 'javascript',
     py: 'python',
     rb: 'ruby'
@@ -21,6 +22,7 @@ module Sandboxy::Language
 end
 
 require_relative 'language/base'
+require_relative 'language/java'
 require_relative 'language/javascript'
 require_relative 'language/python'
 require_relative 'language/ruby'
