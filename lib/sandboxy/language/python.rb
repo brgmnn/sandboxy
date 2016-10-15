@@ -1,8 +1,6 @@
 module Sandboxy::Language::Python
   extend Sandboxy::Language::Base
 
-  self::CMD = 'python'.freeze
-
   def pass
     "print '#{@id} test passed'"
   end

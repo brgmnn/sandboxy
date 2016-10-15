@@ -1,4 +1,5 @@
 FROM sandboxy:base
 
-RUN apk add gcc
+RUN apk add libc-dev clang
 
+ADD entrypoints/c.sh /entrypoint.sh
