@@ -2,6 +2,18 @@
 
 [![Build Status](https://api.travis-ci.org/brgmnn/sandboxy.svg?branch=master)](https://travis-ci.org/brgmnn/sandboxy)
 
+Run large collections of programs in their own sandboxed docker container against test suites.
+
+## Supported languages
+
+Inbuilt support for the following languages:
+
+- C
+- Java
+- Javascript
+- Python
+- Ruby
+
 ## Templates
 
 A template is just an ERB template that wraps a solution. It has the path:
