@@ -1,12 +1,12 @@
-module Sandboxy::Language::Javascript
+module Sandboxy::Language::C
   extend Sandboxy::Language::Base
 
   def pass
-    "console.log('#{@id} test passed');"
+    "printf(\"#{@id} test passed\");"
   end
 
   def fail
-    "console.log('#{@id} test failed');"
+    "printf(\"#{@id} test failed\");"
   end
 
   def assert

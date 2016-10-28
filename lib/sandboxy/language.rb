@@ -4,6 +4,7 @@
 
 module Sandboxy::Language
   BY_EXTENSION = {
+    c: 'c',
     java: 'java',
     js: 'javascript',
     py: 'python',
@@ -22,6 +23,7 @@ module Sandboxy::Language
 end
 
 require_relative 'language/base'
+require_relative 'language/c'
 require_relative 'language/java'
 require_relative 'language/javascript'
 require_relative 'language/python'
