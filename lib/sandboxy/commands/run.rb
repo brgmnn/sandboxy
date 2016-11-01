@@ -30,7 +30,7 @@ class Sandboxy::Commands::Run
       file, slug, ext = Sandboxy::Path.new(path).info
 
       # Skip any files which do not have a supported file extension
-      next if !Sandboxy::Language.supported?(ext)
+      next unless Sandboxy::Language.supported?(ext)
 
       name = file.bold
 

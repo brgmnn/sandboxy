@@ -16,6 +16,9 @@ Style/AlignParameters:
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 
+Style/CyclomaticComplexity:
+  Max: 7
+
 Style/MultilineOperationIndentation:
   EnforcedStyle: indented
 
