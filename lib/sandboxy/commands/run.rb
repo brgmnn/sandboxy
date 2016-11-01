@@ -29,6 +29,9 @@ class Sandboxy::Commands::Run
       id = path.split('/')[-2]
       file, slug, ext = Sandboxy::Path.new(path).info
 
+      # Skip any files which do not have a supported file extension
+      next if !Sandboxy::Language.supported?(ext)
+
       name = file.bold
 
       # If the question has an associated ERB template, wrap the file in the

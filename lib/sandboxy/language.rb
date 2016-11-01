@@ -21,7 +21,7 @@ module Sandboxy::Language
     BY_EXTENSION[ext.to_sym]
   end
 
-  def self.supported(ext)
+  def self.supported?(ext)
     !get(ext).nil?
   end
 end
