@@ -22,7 +22,7 @@ module Sandboxy::Language
   end
 
   def self.supported(ext)
-    !!self.get(ext).nil?
+    !get(ext).nil?
   end
 end
 
