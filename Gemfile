@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'activesupport'
-gem 'docker-api'
+gem 'aruba', '~> 0.14.2'
 gem 'colorize'
 gem 'commander'
-gem 'rubocop'
+gem 'cucumber'
+gem 'docker-api'
 gem 'pry'
+gem 'rubocop'
