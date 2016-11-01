@@ -14,7 +14,7 @@ class Sandboxy::Template
       .map { |p| File.expand_path(p) }
 
     # If there are no templates to test
-    return [{ id: nil, path: path }] if templates.nil?
+    return [{ id: nil, path: path }] if templates.empty?
 
     templates.map do |template_path|
       tmp_path = Tempfile.new.path

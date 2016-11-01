@@ -20,6 +20,10 @@ module Sandboxy::Language
   def self.get(ext)
     BY_EXTENSION[ext.to_sym]
   end
+
+  def self.supported(ext)
+    !get(ext).nil?
+  end
 end
 
 require_relative 'language/base'
