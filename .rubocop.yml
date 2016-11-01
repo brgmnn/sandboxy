@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - 'examples/**/*'
+    - 'vendor/**/*'
 
 Documentation:
   Enabled: false
