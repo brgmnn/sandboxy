@@ -1,6 +1,7 @@
 # Sandboxy
 
 [![Build Status](https://api.travis-ci.org/brgmnn/sandboxy.svg?branch=master)](https://travis-ci.org/brgmnn/sandboxy)
+[![Code Climate](https://codeclimate.com/github/brgmnn/sandboxy/badges/gpa.svg)](https://codeclimate.com/github/brgmnn/sandboxy)
 
 Run large collections of programs in their own sandboxed docker container against test suites.
 
