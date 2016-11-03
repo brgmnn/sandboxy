@@ -26,13 +26,14 @@ class Sandboxy::Commands::Run
     results = Hash.new { |hash, key| hash[key] = {} }
 
     progress paths do |path|
-      id = path.split('/')[-2]
+      id = path.split('/')[1]
       file, slug, ext = Sandboxy::Path.new(path).info
 
       # Skip any files which do not have a supported file extension
       next unless Sandboxy::Language.supported?(ext)
 
       name = file.bold
+      lang = Sandboxy::Language.get_class(ext)
 
       # If the question has an associated ERB template, wrap the file in the
       # template.
@@ -47,11 +48,18 @@ class Sandboxy::Commands::Run
         invalid: 0
       }
 
+      # Fail empty code files
+      if lang.empty?(path)
+        res[:invalid] += 1
+        print "\033[2K\r #{id.blue.bold} #{name.red} emtpy\n"
+        next
+      end
+
       templates.each do |t|
         tid, tpath, tsuite = t.values_at(:id, :path, :suite_path)
 
         # Get the language and run the file in a container runtime.
-        stdout, stderr, profile = Sandboxy::Language.get_class(ext).run(tpath)
+        stdout, stderr, profile = lang.run(tpath)
 
         results[id][slug][:tests] << profile.merge(
           path: tsuite,

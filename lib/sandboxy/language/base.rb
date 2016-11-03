@@ -20,4 +20,8 @@ module Sandboxy::Language::Base
   def assert
     raise NotImplementedError
   end
+
+  def empty?(path)
+    File.read(path).strip.empty?
+  end
 end
